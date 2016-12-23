@@ -10,4 +10,3 @@ initial: Model
 initial =
   { counterModel = Counter.initialModel
   }
-
