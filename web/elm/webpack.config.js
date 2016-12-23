@@ -6,7 +6,7 @@ var autoprefixer      = require( 'autoprefixer' );
 var ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
 var CopyWebpackPlugin = require( 'copy-webpack-plugin' );
 var entryPath         = path.join( __dirname, 'src/static/index.js' );
-var outputPath        = path.join( __dirname, 'dist' );
+var outputPath        = path.join( __dirname, '../public' );
 
 console.log( 'WEBPACK GO!');
 
@@ -56,13 +56,15 @@ if ( TARGET_ENV === 'development' ) {
   module.exports = merge( commonConfig, {
 
     entry: [
-      'webpack-dev-server/client?http://localhost:8080',
+      'webpack-dev-server/client?http://localhost:5000',
       entryPath
     ],
 
     devServer: {
       // serve index.html in place of 404 responses
       historyApiFallback: true,
+      inline: true,
+      port: 5000
     },
 
     module: {
