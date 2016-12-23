@@ -22,4 +22,14 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
 secrets
+
+# Mac config
+*.DS_Store
+
+# NPM, Front end
+node_modules/
+elm-stuff/
+./web/elm/temp/
+./web/elm/dist/
