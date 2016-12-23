@@ -25,3 +25,9 @@ _testmain.go
 
 # Mac config
 *.DS_Store
+
+# NPM, Front end
+node_modules/
+elm-stuff/
+./web/elm/temp/
+./web/elm/dist/
