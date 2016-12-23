@@ -1,11 +1,13 @@
 FROM golang
 
-ENV PORT 80
+ENV PORT 5000
 
-RUN go get github.com/danielkermode/marbletrader/web/server
+COPY web/server web/server
 
-ADD web/public web/public
+RUN go build web/server/server.go
 
-EXPOSE 80
+COPY web/public web/public
 
-ENTRYPOINT server
+EXPOSE 5000
+
+ENTRYPOINT ./server
