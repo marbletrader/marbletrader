@@ -1,21 +1,6 @@
 # Setup (Constants, backdrop, nav)
-{TextLayer} = require "TextLayer"
-
-# https://coolors.co/2b2d42-a51c30-2a3d45-4b296b-3c153b
-colors =
-	lightGray: "rgba(230,230,230,1)"
-	veil: "rgba(185,185,185,0.3)"
-	darkPurple: "#3C153B"
-	spanishViolet: "#4B296B"
-	japaneseIndigo: "#2A3D45"
-	vividBurgundy: "#A51C30"
-	gunmetal: "#2B2D42"
-
-# fonts imported from CDN in index.html
-fonts =
-	balooThambi: "'Baloo Thambi', cursive"
-	mirza: "'Mirza', cursive"
-	muli: "'Muli', sans-serif"
+# {TextLayer} = require "TextLayer"
+{colors, fonts, HeaderText, SubHeaderText, BodyText} = require "Palette"
 
 backdrop = new BackgroundLayer
 	backgroundColor: colors.lightGray
@@ -66,14 +51,73 @@ watercolour = new Layer
 	image: "images/canicas.jpg"
 	opacity: 0.05
 
-heroCase = new Layer
-	parent: backdrop
-	backgroundColor: colors.veil
+# heroCase = new Layer
+# 	parent: backdrop
+# 	backgroundColor: colors.veil
+# 	x: padding.x
+# 	y: Align.top(navCase.height + padding.divider/2)
+# 	width: sizes.widths.inPadding
+# 	height: 50
+# 
+# heroHighlight = new Layer
+# 	parent: heroCase
+# 	y: heroCase.height
+# 	width: heroCase.width
+# 	height: 5
+# 	backgroundColor: colors.spanishViolet
+
+title = new HeaderText
+	text: "Marble Trader"
+	parent: navCase
 	x: padding.x
 	y: Align.top(navCase.height + padding.divider/2)
 	width: sizes.widths.inPadding
-	height: 50
 
+# bodyTopBorder = new Layer
+# 	parent: title
+# 	y: title.height - 70
+# 	width: title.width
+# 	height: 5
+# 	backgroundColor: colors.spanishViolet
+
+# bodySkin = new Layer
+# 	parent: bodyTopBorder
+# 	width: bodyTopBorder.width
+# 	backgroundColor: colors.veil
+# 	height: Screen.height
+	
+descriptionTitle = new SubHeaderText
+	text: "The Dream"
+	parent: backdrop
+	width: title.width / (3/2)
+	height: 60
+	x: padding.divider + (padding.x/2)
+	y: navCase.height+title.height
+descriptionSkin = new Layer
+	parent: descriptionTitle
+	x: -(padding.x/2)
+	y: descriptionTitle.height
+	height: 220
+	width: descriptionTitle.width
+	borderRadius: 20
+	backgroundColor: colors.veil
+
+startTradingSkin = new Layer
+	parent: backdrop
+	x: Align.right(-padding.divider)
+	y: navCase.height+title.height
+	height: 500
+	width: title.width / 3
+	borderRadius: 20
+	backgroundColor: colors.veil
+
+descriptionText = new BodyText
+	parent: descriptionSkin
+	text: "Bringing the nostalgic continuity of marbles and their trading to the web. \n\n In 2016, it was common belief that a software should limit itself to solving one problem in the world.\nMarbleTrader ushers in a new era of holistic applications, that solve not just one, but all problems. "
+	x: padding.standard
+	y: padding.standard
+	width: title.width - (2*padding.standard)
+	
 # pillar :: Int -> Layer
 pillar = (x) ->
 	return new Layer
