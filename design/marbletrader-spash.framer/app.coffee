@@ -1,3 +1,4 @@
+# Setup (Constants, backdrop, nav)
 {TextLayer} = require "TextLayer"
 
 # https://coolors.co/2b2d42-a51c30-2a3d45-4b296b-3c153b
@@ -40,32 +41,38 @@ sizes =
 		inPadding: Screen.height - (2 * padding.y)
 
 	
-titleCase = new Layer
-	parent: backdrop
-	backgroundColor: colors.veil
-	x: Align.left(padding.divider)
-	y: navCase.height + padding.standard
-	width: sizes.widths.inPadding / 2
-	height: 180
-
-titleText = new TextLayer
-	parent: titleCase
-	y: padding.standard
-	text: "Marble Trader"
-	width: titleCase.width
-	color: colors.gunmetal
-	fontFamily: fonts.balooThambi
-	textAlign: "center"
-	fontSize: 80
+# titleCase = new Layer
+# 	parent: backdrop
+# 	backgroundColor: colors.veil
+# 	x: Align.left(padding.divider)
+# 	y: navCase.height + padding.standard
+# 	width: sizes.widths.inPadding / 2
+# 	height: 120
+# 
+# titleText = new TextLayer
+# 	parent: titleCase
+# 	y: 10
+# 	text: "Marble Trader"
+# 	width: titleCase.width
+# 	color: colors.gunmetal
+# 	fontFamily: fonts.balooThambi
+# 	textAlign: "center"
+# 	fontSize: 80
 	
+watercolour = new Layer
+	width: Screen.width
+	height: Screen.height - navCase.height
+	y: navCase.height
+	image: "images/canicas.jpg"
+	opacity: 0.05
 
 heroCase = new Layer
 	parent: backdrop
 	backgroundColor: colors.veil
 	x: padding.x
-	y: Align.bottom(-padding.divider)
+	y: Align.top(navCase.height + padding.divider/2)
 	width: sizes.widths.inPadding
-	height: 200
+	height: 50
 
 # pillar :: Int -> Layer
 pillar = (x) ->
@@ -77,6 +84,7 @@ pillar = (x) ->
 		width: 100
 		height: sizes.heights.inPadding - heroCase.height - navCase.height
 
+# Marbles
 # marble :: Int -> Int -> Int -> String -> Layer
 marble = (r,x,y, color) ->
 	return new Layer
@@ -89,24 +97,8 @@ marble = (r,x,y, color) ->
 		height: r,
 		borderRadius: 2*r
 
-# Marbles
-# marbleSize = 50
-# m0a = marble(marbleSize, Align.right(-100 + -marbleSize), padding.mPlat, colors.vividBurgundy) 
-# m0b = marble(marbleSize, Align.right(-100 + -2.2*marbleSize), padding.mPlat, colors.vividBurgundy) 
-# m0c = marble(marbleSize, Align.right(-100 + -3.4*marbleSize), padding.mPlat, colors.vividBurgundy) 
-# m0d = marble(marbleSize, Align.right(-100 + -4.6*marbleSize), padding.mPlat, colors.vividBurgundy) 
-# m0e = marble(marbleSize, Align.right(-100 + -5.8*marbleSize), padding.mPlat, colors.vividBurgundy)
-# m1a = marble(marbleSize, Align.right(-100 + -1.6*marbleSize), padding.mPlat - 1.1*marbleSize, colors.japaneseIndigo)
-# m1b = marble(marbleSize, Align.right(-100 + -2.8*marbleSize), padding.mPlat - 1.1*marbleSize, colors.japaneseIndigo)
-# m1c = marble(marbleSize, Align.right(-100 + -4.0*marbleSize), padding.mPlat - 1.1*marbleSize, colors.japaneseIndigo)
-# m1d = marble(marbleSize, Align.right(-100 + -5.2*marbleSize), padding.mPlat - 1.1*marbleSize, colors.japaneseIndigo)
-# m2a = marble(marbleSize, Align.right(-100 + -2.2*marbleSize), padding.mPlat - 2.2*marbleSize, colors.spanishViolet)
-# m2b = marble(marbleSize, Align.right(-100 + -3.4*marbleSize), padding.mPlat - 2.2*marbleSize, colors.spanishViolet)
-# m2c = marble(marbleSize, Align.right(-100 + -4.6*marbleSize), padding.mPlat - 2.2*marbleSize, colors.spanishViolet)
-# m3a = marble(marbleSize, Align.right(-100 + -2.8*marbleSize), padding.mPlat - 3.3*marbleSize, colors.darkPurple)
-# m3b = marble(marbleSize, Align.right(-100 + -4.0*marbleSize), padding.mPlat - 3.3*marbleSize, colors.darkPurple)
-# m4a = marble(marbleSize, Align.right(-100 + -3.4*marbleSize), padding.mPlat - 4.4*marbleSize, colors.spanishViolet)
-
+# marbleTower :: Int -> Int -> Null
+# side effects, generate on canvas.
 marbleTower = (size, rightAlign) ->
   m0a = marble(size, Align.right(-rightAlign + -size), padding.mPlat, colors.vividBurgundy) 
   m0b = marble(size, Align.right(-rightAlign + -2.2*size), padding.mPlat, colors.vividBurgundy) 
@@ -124,9 +116,9 @@ marbleTower = (size, rightAlign) ->
   m3b = marble(size, Align.right(-rightAlign + -4.0*size), padding.mPlat - 3.3*size, colors.darkPurple)
   m4a = marble(size, Align.right(-rightAlign + -3.4*size), padding.mPlat - 4.4*size, colors.spanishViolet)
 
-marbleTower(40, 700)
-marbleTower(40, 400)
-marbleTower(40, 100)
+# marbleTower(40, 700)
+# marbleTower(40, 400)
+# marbleTower(40, 100)
 
 
 
