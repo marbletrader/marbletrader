@@ -26,24 +26,6 @@ sizes =
 		inPadding: Screen.height - (2 * padding.y)
 
 	
-# titleCase = new Layer
-# 	parent: backdrop
-# 	backgroundColor: colors.veil
-# 	x: Align.left(padding.divider)
-# 	y: navCase.height + padding.standard
-# 	width: sizes.widths.inPadding / 2
-# 	height: 120
-# 
-# titleText = new TextLayer
-# 	parent: titleCase
-# 	y: 10
-# 	text: "Marble Trader"
-# 	width: titleCase.width
-# 	color: colors.gunmetal
-# 	fontFamily: fonts.balooThambi
-# 	textAlign: "center"
-# 	fontSize: 80
-	
 watercolour = new Layer
 	width: Screen.width
 	height: Screen.height - navCase.height
@@ -51,6 +33,13 @@ watercolour = new Layer
 	image: "images/canicas.jpg"
 	opacity: 0.05
 
+# Title
+title = new HeaderText
+	text: "Marble Trader"
+	parent: navCase
+	x: padding.x
+	y: Align.top(navCase.height + padding.divider/2)
+	width: sizes.widths.inPadding
 # heroCase = new Layer
 # 	parent: backdrop
 # 	backgroundColor: colors.veil
@@ -66,13 +55,6 @@ watercolour = new Layer
 # 	height: 5
 # 	backgroundColor: colors.spanishViolet
 
-title = new HeaderText
-	text: "Marble Trader"
-	parent: navCase
-	x: padding.x
-	y: Align.top(navCase.height + padding.divider/2)
-	width: sizes.widths.inPadding
-
 # bodyTopBorder = new Layer
 # 	parent: title
 # 	y: title.height - 70
@@ -86,11 +68,11 @@ title = new HeaderText
 # 	backgroundColor: colors.veil
 # 	height: Screen.height
 	
+# Description Panel
 descriptionTitle = new SubHeaderText
 	text: "The Dream"
 	parent: backdrop
 	width: title.width / (3/2)
-	height: 60
 	x: padding.divider + (padding.x/2)
 	y: navCase.height+title.height
 descriptionSkin = new Layer
@@ -101,7 +83,36 @@ descriptionSkin = new Layer
 	width: descriptionTitle.width
 	borderRadius: 20
 	backgroundColor: colors.veil
+descriptionText = new BodyText
+	parent: descriptionSkin
+	text: "Bringing the nostalgic continuity of marbles and their trading to the world of applications. \n\n In 2016, it was common belief that a software should limit itself to solving one problem in the world.\nMarbleTrader ushers in a new era of holistic applications, that solve not just one, but all problems. "
+	x: padding.standard
+	y: padding.standard
+	width: title.width - (2*padding.standard)
 
+# Dreamers Panel
+dreamersTitle = new SubHeaderText
+	text: "The Dreamers"
+	parent: descriptionSkin
+	x: (padding.x/2)
+	y: descriptionSkin.height + padding.divider
+	width: descriptionSkin.width
+# dreamersSkin = new Layer
+# 	parent: dreamersTitle
+# 	x: -(padding.x/2)
+# 	y: descriptionTitle.height
+# 	height: 220
+# 	width: descriptionTitle.width
+# 	borderRadius: 20
+# 	backgroundColor: colors.veil
+# descriptionText = new BodyText
+# 	parent: dreamersSkin
+# 	text: "Bringing the nostalgic continuity of marbles and their trading to the web. \n\n In 2016, it was common belief that a software should limit itself to solving one problem in the world.\nMarbleTrader ushers in a new era of holistic applications, that solve not just one, but all problems. "
+# 	x: padding.standard
+# 	y: padding.standard
+# 	width: title.width - (2*padding.standard)
+
+# Start Trading Panel
 startTradingSkin = new Layer
 	parent: backdrop
 	x: Align.right(-padding.divider)
@@ -109,14 +120,7 @@ startTradingSkin = new Layer
 	height: 500
 	width: title.width / 3
 	borderRadius: 20
-	backgroundColor: colors.veil
-
-descriptionText = new BodyText
-	parent: descriptionSkin
-	text: "Bringing the nostalgic continuity of marbles and their trading to the web. \n\n In 2016, it was common belief that a software should limit itself to solving one problem in the world.\nMarbleTrader ushers in a new era of holistic applications, that solve not just one, but all problems. "
-	x: padding.standard
-	y: padding.standard
-	width: title.width - (2*padding.standard)
+	backgroundColor: "transparent"
 	
 # pillar :: Int -> Layer
 pillar = (x) ->

@@ -35,6 +35,7 @@ class SubHeaderText extends TextLayer
     options.fontSize ?= 50
     options.letterSpacing ?= -1
     options.textAlign ?= "left"
+    options.height ?= 60
     super options
 
 class BodyText extends TextLayer
