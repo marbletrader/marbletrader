@@ -2,12 +2,14 @@ FROM golang
 
 ENV PORT 5000
 
-COPY web/server web/server
+COPY server server
 
-RUN go build web/server/server.go
+WORKDIR server
 
-COPY web/public web/public
+RUN go install
+
+COPY public public
 
 EXPOSE 5000
 
-ENTRYPOINT ./server
+ENTRYPOINT server

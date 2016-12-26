@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/danielkermode/marbletrader/web/server/db"
+	"./db"
 )
 
 func main() {

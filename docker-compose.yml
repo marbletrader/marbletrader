@@ -1,0 +1,25 @@
+version: '2'
+services:
+  db:
+    build: ./database
+    ports:
+     - "5432:5432"
+    environment:
+      SQL_ROOT_PASSWORD: 'password'
+      SQL_DATABASE: 'marbletrader_dev'
+      SQL_PASSWORD: 'password'
+
+## NB: container startup order is not solved gracefully in docker-compose.
+## See: https://github.com/docker/compose/issues/374
+## Potential solutions: https://medium.com/@aelsabbahy/docker-1-12-kubernetes-simplified-health-checks-and-container-ordering-with-goss-fa8debbe676c#.co2vf3wi3
+
+  server:
+    volumes:
+     - ./web:/app
+    build: web
+    ports:
+     - "5000:5000"
+    # environment:
+    depends_on:
+      - db
+    command: server
