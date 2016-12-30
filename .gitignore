@@ -33,3 +33,4 @@ node_modules/
 elm-stuff/
 ./web/elm/temp/
 ./web/elm/dist/
+./web/server/main

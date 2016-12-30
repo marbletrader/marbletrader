@@ -1,0 +1,17 @@
+version: '2'
+services:
+  db:
+    image: postgres:alpine
+    ports:
+     - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: 'password'
+      POSTGRES_USER: 'marbletrader_dev'
+
+  server:
+    image: absurdisms/marbletrader:latest
+    ports:
+     - "5000:5000"
+    # environment:
+    depends_on:
+      - db

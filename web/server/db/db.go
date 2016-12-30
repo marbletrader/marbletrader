@@ -10,7 +10,6 @@ import (
 
 // Init ...
 func Init() {
-	fmt.Println("daaa")
 	db, err := sql.Open("postgres", "user=marbletrader_dev password=password dbname=marbletrader_dev host=db sslmode=disable")
 
 	if err != nil {
@@ -22,4 +21,6 @@ func Init() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	fmt.Println("db connection ok")
 }
