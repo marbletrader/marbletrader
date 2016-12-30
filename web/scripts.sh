@@ -8,12 +8,11 @@ function build {
 
 case $1 in
   watch)
-    cd server
-    CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
+    build
     docker restart marbletrader_server_1
-    inotifywait -e close_write,moved_to,create  . ./db |
+    inotifywait -e close_write,moved_to,create  ./server ./server/db |
     while read -r directory events filename; do
-      ./build.sh watch
+      ./scripts.sh watch
     done
     ;;
   quick)

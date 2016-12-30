@@ -4,7 +4,7 @@ ENV PORT 5000
 
 COPY server/main /
 
-COPY public public
+COPY public /public
 
 EXPOSE 5000
 

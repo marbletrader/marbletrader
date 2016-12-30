@@ -9,11 +9,20 @@ import (
 	"github.com/danielkermode/marbletrader/web/server/db"
 )
 
+func serveSingle(pattern string, filename string) {
+	http.HandleFunc(pattern, func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, filename)
+	})
+}
+
 func main() {
 	log.SetFlags(log.Lshortfile)
 
+	serveSingle("/", "/public/index.html")
+	serveSingle("/favicon.ico", "/public/favicon.ico")
+
 	// static files
-	http.Handle("/", http.FileServer(http.Dir("public")))
+	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("/public/assets"))))
 
 	port := os.Getenv("PORT")
 	if port == "" {

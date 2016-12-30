@@ -15,6 +15,7 @@ services:
   server:
     volumes:
      - ./web/server/main:/main
+     - ./web/public:/public
     build: web
     ports:
      - "5000:5000"
