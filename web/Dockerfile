@@ -1,4 +1,4 @@
-FROM scratch
+FROM golang
 
 ENV PORT 5000
 

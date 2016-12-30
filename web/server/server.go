@@ -7,10 +7,7 @@ import (
 	"os"
 
 	"github.com/danielkermode/marbletrader/web/server/db"
-	"github.com/gorilla/mux"
 )
-
-var router = mux.NewRouter()
 
 func serveSingle(pattern string, filename string) {
 	http.HandleFunc(pattern, func(w http.ResponseWriter, r *http.Request) {
@@ -20,10 +17,11 @@ func serveSingle(pattern string, filename string) {
 
 func main() {
 	log.SetFlags(log.Lshortfile)
-	http.Handle("/portal/", router)
+
 	serveSingle("/", "/public/index.html")
 	serveSingle("/favicon.ico", "/public/favicon.ico")
-	serveSingle("/login", "/public/login.html")
+	http.HandleFunc("/login", HandleLogin)
+	http.HandleFunc("/profile", HandleProfile)
 
 	// static files
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("/public/assets"))))
