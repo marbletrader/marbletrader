@@ -2,6 +2,7 @@ package db
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	// driver
 	_ "github.com/lib/pq"
@@ -9,7 +10,8 @@ import (
 
 // Init ...
 func Init() {
-	db, err := sql.Open("postgres", "user=danker dbname=TotalRecall sslmode=disable")
+	fmt.Println("daaa")
+	db, err := sql.Open("postgres", "user=marbletrader_dev password=password dbname=marbletrader_dev host=db sslmode=disable")
 
 	if err != nil {
 		log.Fatal(err)

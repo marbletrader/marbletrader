@@ -1,15 +1,11 @@
-FROM golang
+FROM scratch
 
 ENV PORT 5000
 
-COPY server server
-
-WORKDIR server
-
-RUN go install
+COPY server/main /
 
 COPY public public
 
 EXPOSE 5000
 
-ENTRYPOINT server
+CMD ["/main"]
