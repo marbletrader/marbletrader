@@ -7,5 +7,8 @@ case $1 in
       ./build.sh watch
     done
     ;;
+  quick)
+    CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
+    ;;
   *)
 esac

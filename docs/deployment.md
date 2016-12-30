@@ -6,6 +6,8 @@ ip - 52.76.168.34
 
 ssh in `ssh -i ~/.ssh/mt-keys ubuntu@52.76.168.34`.
 
-Pull new image if needed `docker pull absurdisms/marbletrader:latest`.
+Check Docker Compose file.
 
-Copy Docker Compose file and run `docker-compose up &`.
+`pkill -f docker-compose` to shutdown previous process.
+
+Pull new image if needed `docker pull absurdisms/marbletrader:latest && docker-compose up &`.
