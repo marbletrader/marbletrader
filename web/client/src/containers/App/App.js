@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import blueMarble from '../../assets/the-blue-marble.png'
 import './App.css'
+// Elm
+import Elm from 'react-elm-components'
 
 class App extends Component {
   render () {
