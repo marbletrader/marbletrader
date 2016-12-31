@@ -1,0 +1,32 @@
+{
+  "name": "files",
+  "version": "0.0.1",
+  "private": true,
+  "devDependencies": {
+    "flow-bin": "^0.37.4",
+    "react-scripts": "0.8.4",
+    "redux-devtools": "^3.3.1",
+    "rimraf": "^2.5.4",
+    "standard": "^8.6.0"
+  },
+  "dependencies": {
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-elm-components": "^1.0.1",
+    "react-redux": "^5.0.1",
+    "redux": "^3.6.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "build:elm": "elm-make run build",
+    "lint": "standard --fix",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "standard": {
+    "globals": [
+      "it"
+    ]
+  }
+}

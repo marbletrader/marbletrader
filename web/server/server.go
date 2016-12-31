@@ -18,13 +18,13 @@ func serveSingle(pattern string, filename string) {
 func main() {
 	log.SetFlags(log.Lshortfile)
 
-	serveSingle("/", "/public/index.html")
-	serveSingle("/favicon.ico", "/public/favicon.ico")
+	serveSingle("/", "/client/build/index.html")
+	serveSingle("/favicon.ico", "/client/build/favicon.ico")
 	http.HandleFunc("/login", HandleLogin)
 	http.HandleFunc("/profile", HandleProfile)
 
 	// static files
-	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("/public/assets"))))
+	// http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("/public/assets"))))
 
 	port := os.Getenv("PORT")
 	if port == "" {
