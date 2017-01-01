@@ -1,165 +1,34 @@
 port module Bread exposing (main)
+import Html exposing (Html, button, div, text)
+import Html.Events exposing (onClick)
 
-import Html exposing (Html, program, text, button, div, input, br, span)
-import Html.Attributes exposing (class, type', value)
-import Html.Events exposing (onClick, on, onInput, targetValue)
-import String
-import Json.Decode as Json
-
-
-main : Program Never
 main =
-    Html.program
-        { init = init
-        , view = view
-        , update = update
-        , subscriptions = \_ -> Sub.none
-        }
+  Html.beginnerProgram { model = model, view = view, update = update }
+-- MODEL 
 
+type alias Model = Int
 
-type alias Model =
-    { field : String
-    , list : List ( Int, String )
-    , id : Int
-    }
+model: Model
+model =
+  0
 
+-- UPDATE
+type Msg = Increment | Decrement
 
-type Msg
-    = UpdateField String
-    | Remove Int
-    | Add
-    | Clear
-    | NoOp
-
-
-init : ( Model, Cmd Msg )
-init =
-    ( empty, Cmd.none )
-
-
-empty : Model
-empty =
-    (Model "" [] 0)
-
-
-update : Msg -> Model -> ( Model, Cmd Msg )
+update: Msg -> Model -> Model
 update msg model =
-    case Debug.log "Message" msg of
-        UpdateField name ->
-            ( { model | field = name }, Cmd.none )
+  case msg of
+    Increment ->
+      model + 1
 
-        Add ->
-            let
-                members =
-                    List.map (snd) model.list
-            in
-                if String.isEmpty model.field then
-                    ( model, Cmd.none )
-                else if List.member model.field members then
-                    ( model, Cmd.none )
-                else
-                    ( { model
-                        | id = model.id + 1
-                        , list = (model.list ++ [ ( model.id + 1, model.field ) ])
-                        , field = ""
-                      }
-                    , Cmd.none
-                    )
+    Decrement ->
+      model - 1
 
-        Remove id ->
-            let
-                newList =
-                    List.filter (\( itemId, _ ) -> itemId /= id) model.list
-            in
-                ( { model | list = newList }, Cmd.none )
-
-        Clear ->
-            ( { model
-                | list = []
-                , id = 0
-              }
-            , Cmd.none
-            )
-
-        _ ->
-            ( model, Cmd.none )
-
-
-view : Model -> Html Msg
+-- VIEW
+view: Model -> Html Msg
 view model =
-    let
-        add =
-            [ br [] [], addTodo model ]
-
-        list =
-            List.map item model.list
-
-        clr =
-            [ br [] [], clear ]
-    in
-        div [] (add ++ list ++ clr)
-
-
-
-{- Html Helpers -}
-
-
-addTodo : Model -> Html Msg
-addTodo model =
-    div [ class "row" ]
-        [ div [ class "ten columns" ]
-            [ inpt model.field ]
-        , div [ class "two columns" ]
-            [ btn "Add" Add ]
-        ]
-
-
-item : ( Int, String ) -> Html Msg
-item ( id, name ) =
-    div [ class "row" ]
-        [ div [ class "ten columns" ]
-            [ text name ]
-        , div [ class "two columns helpers is-right-aligned" ]
-            [ txt "╳" (Remove id) ]
-        ]
-
-
-clear : Html Msg
-clear =
-    div [ class "row" ]
-        [ btn "Clear" Clear ]
-
-
-btn : String -> Msg -> Html Msg
-btn label action =
-    button [ onClick action ]
-        [ text label ]
-
-
-txt : String -> Msg -> Html Msg
-txt label action =
-    span [ onClick action, class "helpers is-actionable is-mini" ]
-        [ text label ]
-
-
-inpt : String -> Html Msg
-inpt label =
-    let
-        onKeyUp =
-            Json.map
-                (\keyCode ->
-                    if keyCode == 13 then
-                        Add
-                    else
-                        NoOp
-                )
-                (Json.at [ "keyCode" ] Json.int)
-    in
-        input
-            [ onInput UpdateField
-            , on "keyup" onKeyUp
-            , class "u-full-width"
-            , type' "text"
-            , value label
-            ]
-            []
+  div []
+    [ button [ onClick Decrement ] [ text "_" ]
+    , div [] [ text (toString model) ]
+    , button [ onClick Increment ] [ text "+" ]
+    ]

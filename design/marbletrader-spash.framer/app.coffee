@@ -123,6 +123,7 @@ startTradingSkin = new Layer
 	backgroundColor: "transparent"
 	
 # pillar :: Int -> Layer
+
 pillar = (x) ->
 	return new Layer
 		parent: heroCase
