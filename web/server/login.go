@@ -17,6 +17,9 @@ type AccessToken struct {
 	Expiry int64
 }
 
+// TODO: set up config for production/dev environments.
+// currently using dev fb secrets and dev url.
+
 func readHTTPBody(response *http.Response) string {
 
 	fmt.Println("Reading body")
@@ -75,9 +78,9 @@ func HandleLogin(w http.ResponseWriter, r *http.Request) {
 
 	// generate loginURL
 	fbConfig := &oauth2.Config{
-		ClientID:     "",
-		ClientSecret: "",
-		RedirectURL:  "https://marbletrader.club/profile",
+		ClientID:     "125509244616445",
+		ClientSecret: "61f1129cbc048b34f758b19db2494166",
+		RedirectURL:  "http://localhost:5000/profile",
 		Scopes:       []string{"email", "user_birthday", "user_location", "user_about_me"},
 		Endpoint: oauth2.Endpoint{
 			AuthURL:  "https://www.facebook.com/dialog/oauth",
@@ -99,9 +102,9 @@ func HandleProfile(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	code := r.FormValue("code")
 
-	ClientID := ""
-	ClientSecret := ""
-	RedirectURL := "https://marbletrader.club/profile"
+	ClientID := "125509244616445"
+	ClientSecret := "61f1129cbc048b34f758b19db2494166"
+	RedirectURL := "http://localhost:5000/profile"
 
 	accessToken := GetAccessToken(ClientID, code, ClientSecret, RedirectURL)
 
@@ -113,7 +116,7 @@ func HandleProfile(w http.ResponseWriter, r *http.Request) {
 	} else {
 		str := readHTTPBody(response)
 		// dump out all the data
-		w.Write([]byte(str))
+		// w.Write([]byte(str))
 
 		// see https://www.socketloop.com/tutorials/golang-process-json-data-with-jason-package
 		user, _ := jason.NewObjectFromBytes([]byte(str))
