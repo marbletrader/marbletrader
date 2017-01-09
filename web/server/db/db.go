@@ -25,7 +25,7 @@ func Init() {
 		log.Fatal(err)
 	}
 
-	_, err = db.Exec("CREATE TABLE IF NOT EXISTS Users(id integer, email varchar(32))")
+	_, err = db.Exec("CREATE TABLE IF NOT EXISTS Users(id SERIAL, email varchar(32))")
 
 	if err != nil {
 		log.Fatal(err)

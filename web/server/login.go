@@ -9,6 +9,7 @@ import (
 	"golang.org/x/oauth2"
 
 	"github.com/antonholmquist/jason"
+	"github.com/danielkermode/marbletrader/web/server/db/models"
 )
 
 // AccessToken ...
@@ -22,7 +23,7 @@ type AccessToken struct {
 
 func readHTTPBody(response *http.Response) string {
 
-	fmt.Println("Reading body")
+	// fmt.Println("Reading body")
 
 	bodyBuffer := make([]byte, 5000)
 	var str string
@@ -34,7 +35,6 @@ func readHTTPBody(response *http.Response) string {
 		if err != nil {
 
 		}
-		fmt.Println(string(bodyBuffer[:count]))
 		str += string(bodyBuffer[:count])
 	}
 
@@ -56,7 +56,7 @@ func GetAccessToken(clientID string, code string, secret string, callbackURI str
 		var token AccessToken
 
 		tokenArr := strings.Split(auth, "&")
-		fmt.Println("Get Access Token")
+		// fmt.Println("Get Access Token")
 		token.Token = strings.Split(tokenArr[0], "=")[1]
 		expireInt, err := strconv.Atoi(strings.Split(tokenArr[1], "=")[1])
 
@@ -122,6 +122,8 @@ func HandleProfile(w http.ResponseWriter, r *http.Request) {
 		user, _ := jason.NewObjectFromBytes([]byte(str))
 
 		email, _ := user.GetString("email")
+
+		models.InsertUserIfNotExists(email)
 
 		w.Write([]byte(fmt.Sprintf("Email is %s<br>", email)))
 	}

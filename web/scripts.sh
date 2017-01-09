@@ -10,7 +10,7 @@ case $1 in
   watch)
     build
     docker restart marbletrader_server_1
-    inotifywait -e close_write,moved_to,create  ./server ./server/db |
+    inotifywait -e close_write,moved_to,create  ./server -r |
     while read -r directory events filename; do
       ./scripts.sh watch
     done
